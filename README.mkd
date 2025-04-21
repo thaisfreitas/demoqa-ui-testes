@@ -1,0 +1,79 @@
+# Automação de Testes de UI com Cucumber e Cypress para DemoQA
+
+Este projeto demonstra a automação de testes de interface do usuário para o website [https://demoqa.com/](https://demoqa.com/) utilizando as ferramentas Cucumber e Cypress. O objetivo é fornecer um exemplo simples e claro de como configurar e implementar testes automatizados com foco na legibilidade e colaboração.
+
+## Estrutura do Projeto
+demoqa-cypress-cucumber/
+├── cypress/
+│   ├── e2e/
+│   │   ├── features/
+│   │   │   └── practice_form.feature  # Arquivo de cenário de teste em Cucumber
+│   │   └── step_definitions/
+│   │       └── practice_form_steps.js # Implementação dos passos do Cucumber
+│   ├── fixtures/
+│   │   └── sample.txt                # Arquivo para upload
+│   ├── plugins/
+│   └── support/
+├── node_modules/
+├── package-lock.json
+├── package.json
+└── README.md
+
+Antes de executar os testes, certifique-se de ter o seguinte instalado em sua máquina:
+
+* **Node.js** (versão 16 ou superior recomendada): [https://nodejs.org/](https://nodejs.org/)
+* **npm** (geralmente instalado com o Node.js) ou **yarn**: [https://yarnpkg.com/](https://yarnpkg.com/)
+
+## Configuração e Execução
+
+Siga estes passos para configurar e executar os testes:
+
+1.  **Clone o repositório:**
+    ```bash
+    git clone <URL_DO_SEU_REPOSITORIO>
+    cd demoqa-cypress-cucumber
+    ```
+    (Substitua `<URL_DO_SEU_REPOSITORIO>` pela URL do seu repositório no GitHub).
+
+2.  **Instale as dependências:**
+    ```bash
+    npm install
+    # ou
+    yarn install
+    ```
+
+3.  **Abra a interface do Cypress:**
+    ```bash
+    npx cypress open
+    # ou
+    yarn cypress open
+    ```
+    Isso abrirá a janela do Cypress, onde você poderá ver e executar os testes visualmente.
+
+4.  **Execute os testes em modo headless (sem interface gráfica):**
+    ```bash
+    npx cypress run
+    # ou
+    yarn cypress run
+    ```
+    Este comando executará todos os testes e exibirá os resultados no terminal.
+
+## Cenários de Teste Implementados
+
+Atualmente, o projeto contém o seguinte cenário de teste:
+
+* **Preencher e submeter o formulário de prática:**
+    * Acessa a página inicial do DemoQA.
+    * Navega até a seção de Forms e clica em Practice Form.
+    * Preenche o formulário com dados aleatórios (nome, sobrenome, e-mail, gênero, telefone, data de nascimento, hobbies, endereço, estado e cidade).
+    * Realiza o upload do arquivo `sample.txt` localizado na pasta `cypress/fixtures`.
+    * Submete o formulário.
+    * Verifica se um modal de confirmação é exibido.
+    * Fecha o modal de confirmação.
+
+## Próximos Passos
+
+Este projeto serve como um ponto de partida. Você pode adicionar mais cenários de teste para cobrir outras funcionalidades do website DemoQA. Para adicionar novos testes:
+
+1.  Crie um novo arquivo `.feature` dentro da pasta `cypress/e2e/features` para descrever o novo cenário.
+2.  Crie um novo arquivo `.js` (ou adicione ao existente) dentro da pasta `cypress/e2e/step_definitions` para implementar os passos definidos no novo arquivo `.feature`.
