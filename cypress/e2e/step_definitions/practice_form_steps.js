@@ -54,10 +54,6 @@ When('I fill the form with random data', () => {
   cy.get('#city').find('input').type('Delhi{enter}', { force: true });
 });
 
-When('I submit the form', () => {
-  cy.get('#submit').click({ force: true });
-});
-
 When('I upload a {string} file', (filename) => {
   cy.fixture(filename).then(fileContent => {
     cy.get('#uploadPicture').attachFile({
