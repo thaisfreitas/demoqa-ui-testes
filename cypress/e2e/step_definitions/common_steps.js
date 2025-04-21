@@ -12,3 +12,7 @@ Given('I choose the {string} option', (option) => {
 Given('I click on the {string} submenu', (submenu) => {
 cy.contains(submenu).click();
 });
+
+When('I submit the form', () => {
+    cy.get('#submit').click({ force: true });
+});
