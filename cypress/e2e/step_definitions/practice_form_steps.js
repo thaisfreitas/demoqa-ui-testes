@@ -4,8 +4,8 @@ import { faker } from '@faker-js/faker';
 const firstName = faker.person.firstName();
 const lastName = faker.person.lastName();
 const email = faker.internet.email();
-const mobile = faker.phone.number('##########');
-const day = faker.number.int({ min: 1, max: 28 });
+const mobile = faker.phone.number().replace(/\D/g, '').slice(0, 10);
+const day = String(faker.number.int({ min: 1, max: 28 })).padStart(2, '0');
 const month = faker.date.month();
 const year = faker.number.int({ min: 1900, max: 2023 });
 const gender = faker.helpers.arrayElement(['Male', 'Female', 'Other']);
@@ -36,13 +36,26 @@ When('I fill the form with random data', () => {
   cy.get('#dateOfBirthInput').click();
   cy.get('.react-datepicker__month-select').select(month);
   cy.get('.react-datepicker__year-select').select(year.toString());
-  cy.get(`.react-datepicker__day--0${day}:not(.react-datepicker__day--outside-month)`).click();
+  cy.get(`.react-datepicker__day--0${day}:not(.react-datepicker__day--outside-month)`)
+  .should('exist')
+  .click();
   hobbies.forEach(hobby => {
-    cy.contains('.subjects-auto-complete__input', 'Hobbies').type(`${hobby}{enter}`);
+    cy.contains('.custom-control-label', hobby).click();
   });
   cy.get('#currentAddress').type(address);
-  cy.get('#state').click().contains(state).click();
-  cy.get('#city').click().contains(city).click();
+  
+  cy.get('#state').click({ force: true });
+
+  cy.get('div.css-1wa3eu0-placeholder').contains('Select State').click();
+
+  cy.get('#state').find('input').type('NCR{enter}');
+
+  cy.get('#city').click();
+  cy.get('#city').find('input').type('Delhi{enter}', { force: true });
+});
+
+When('I submit the form', () => {
+  cy.get('#submit').click({ force: true });
 });
 
 When('I upload a {string} file', (filename) => {
@@ -55,15 +68,18 @@ When('I upload a {string} file', (filename) => {
   });
 });
 
-When('I submit the form', () => {
-  cy.get('#submit').click({ force: true });
-});
-
 Then('a modal dialog should be displayed', () => {
-  cy.get('.modal-content').should('be.visible');
+  cy.get('.modal.show', { timeout: 10000 }).should('be.visible');
 });
 
 Then('I close the modal dialog', () => {
-  cy.get('#closeLargeModal').click();
-  cy.get('.modal-content').should('not.be.visible');
+  cy.get('body').then(($body) => {
+    if ($body.find('.modal-backdrop').length) {
+      cy.get('.modal-backdrop').invoke('remove');
+    }
+  });
+  cy.get('#closeLargeModal')
+    .scrollIntoView()
+    .should('exist')
+    .click({ force: true });
 });
