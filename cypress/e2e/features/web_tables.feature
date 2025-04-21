@@ -19,4 +19,11 @@ Feature: Interação com Web Tables
     When I click the "Delete" button for the new record
     Then the new record should be deleted from the table
 
-    
+Scenario: Criar e deletar múltiplos registros dinamicamente (Bônus)
+    Given I navigate to the DemoQA website
+    And I choose the "Elements" option
+    And I click on the "Web Tables" submenu
+    When I create 5 new records dynamically
+    Then all 5 new records should be displayed in the table
+    When I delete all the newly created records
+    Then no new records should be present in the table

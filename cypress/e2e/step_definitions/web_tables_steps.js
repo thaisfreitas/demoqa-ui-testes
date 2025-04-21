@@ -1,7 +1,6 @@
 import { Given, When, Then } from '@badeball/cypress-cucumber-preprocessor';
 import { faker } from '@faker-js/faker';
 
-// Variável para armazenar os dados do novo registro para edição e deleção
 let newRecordData = {};
 let dynamicRecordsData = [];
 
@@ -26,9 +25,6 @@ When('I fill the registration form with new data', () => {
   cy.get('#department').type(newRecordData.department);
 });
 
-// When('I submit the form', () => {
-//   cy.get('#submit').click();
-// });
 
 Then('the new record should be displayed in the table', () => {
   cy.get('.rt-tbody')
@@ -90,30 +86,42 @@ When('I create {int} new records dynamically', (count) => {
     cy.get('#addNewRecordButton').click();
     cy.get('#firstName').type(recordData.firstName);
     cy.get('#lastName').type(recordData.lastName);
-    cy.get('#userEmail').type(recordData.email);
+    cy.get('#userEmail').should('not.be.disabled').type(recordData.email);
     cy.get('#age').type(recordData.age);
     cy.get('#salary').type(recordData.salary);
     cy.get('#department').type(recordData.department);
     cy.get('#submit').click();
+    cy.wait(100);
   }
+//   cy.get('.rt-tbody').find('.rt-tr-group').should('have.length', count);
 });
 
 Then('all {int} new records should be displayed in the table', (count) => {
-  dynamicRecordsData.forEach(record => {
-    cy.get('.rt-tbody')
-      .contains('.rt-tr-group', record.firstName)
-      .should('be.visible');
-  });
+    dynamicRecordsData.forEach(record => {
+      cy.get('.rt-tbody')
+        .find('.rt-tr-group') // Encontra todos os grupos de linhas
+        .filter(`:contains("${record.firstName}")`) // Filtra para encontrar o grupo que contém o nome
+        .within(() => {
+          cy.contains('.rt-td', record.lastName).should('be.visible');
+          cy.contains('.rt-td', record.email).should('be.visible');
+          cy.contains('.rt-td', record.age).should('be.visible');
+          cy.contains('.rt-td', record.salary).should('be.visible');
+          cy.contains('.rt-td', record.department).should('be.visible');
+        });
+    });
 });
 
+
+
 When('I delete all the newly created records', () => {
-  dynamicRecordsData.forEach(record => {
-    cy.get('.rt-tbody')
-      .contains('.rt-tr-group', record.firstName)
-      .within(() => {
-        cy.get('[title="Delete"]').click();
-      });
-  });
+    dynamicRecordsData.forEach(record => {
+      cy.get('.rt-tbody')
+        .find('.rt-tr-group')
+        .filter(`:contains("${record.firstName}")`)
+        .within(() => {
+          cy.get('[title="Delete"]').click();
+        });
+    });
 });
 
 Then('no new records should be present in the table', () => {
@@ -122,4 +130,5 @@ Then('no new records should be present in the table', () => {
       .contains('.rt-tr-group', record.firstName)
       .should('not.exist');
   });
+
 });
