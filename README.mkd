@@ -3,21 +3,8 @@
 Este projeto demonstra a automação de testes de interface do usuário para o website [https://demoqa.com/](https://demoqa.com/) utilizando as ferramentas Cucumber e Cypress. O objetivo é fornecer um exemplo simples e claro de como configurar e implementar testes automatizados com foco na legibilidade e colaboração.
 
 ## Estrutura do Projeto
-demoqa-cypress-cucumber/
-├── cypress/
-│   ├── e2e/
-│   │   ├── features/
-│   │   │   └── practice_form.feature  # Arquivo de cenário de teste em Cucumber
-│   │   └── step_definitions/
-│   │       └── practice_form_steps.js # Implementação dos passos do Cucumber
-│   ├── fixtures/
-│   │   └── sample.txt                # Arquivo para upload
-│   ├── plugins/
-│   └── support/
-├── node_modules/
-├── package-lock.json
-├── package.json
-└── README.md
+![image](https://github.com/user-attachments/assets/77dbcb28-c99c-4f83-b57e-2cc3318c6730)
+
 
 Antes de executar os testes, certifique-se de ter o seguinte instalado em sua máquina:
 
