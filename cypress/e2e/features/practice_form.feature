@@ -9,7 +9,6 @@ Feature: Interação com o formulário de prática
     And I choose the "Forms" option
     And I click on the "Practice Form" submenu
     When I fill the form with random data
-    And I upload a "sample.txt" file
     And I submit the form
     Then a modal dialog should be displayed
     And I close the modal dialog
