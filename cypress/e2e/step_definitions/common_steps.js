@@ -10,7 +10,7 @@ Given('I choose the {string} option', (option) => {
   });
 
 Given('I click on the {string} submenu', (submenu) => {
-cy.contains(submenu).click();
+    cy.contains(submenu).click();
 });
 
 When('I submit the form', () => {

@@ -45,7 +45,6 @@ When('I edit the registration form data', () => {
   newRecordData.salary = faker.number.int({ min: 50000, max: 200000 });
   cy.get('#firstName').clear().type(newRecordData.firstName);
   cy.get('#salary').clear().type(newRecordData.salary);
-  // Podemos editar outros campos conforme necessário
 });
 
 Then('the record should be updated in the table', () => {

@@ -3,7 +3,7 @@ import { Given, When, Then } from '@badeball/cypress-cucumber-preprocessor';
 When('I click on the "New Window" button and a new window should be opened', () => {
     cy.window().then((win) => {
       cy.stub(win, 'open').as('newWindow');
-      cy.wrap('@newWindow'); // Promove o alias para o contexto do Cypress
+      cy.wrap('@newWindow'); 
     });
     cy.get('#windowButton').click();
   });

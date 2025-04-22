@@ -25,7 +25,7 @@ When('I stop the progress bar before it reaches {int}%', (limit) => {
         .then((val) => {
           const currentValue = parseInt(val);
           cy.log(`Valor atual da barra: ${currentValue}`);
-          return Cypress.Promise.resolve(!isNaN(currentValue) && currentValue >= limit); // Retorna uma Promise resolvida
+          return Cypress.Promise.resolve(!isNaN(currentValue) && currentValue >= limit); 
         });
     }, {
       timeout: 40000,

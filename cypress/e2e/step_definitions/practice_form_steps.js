@@ -15,18 +15,6 @@ const state = 'NCR';
 const city = 'Delhi';
 const fileName = 'sample.txt';
 
-// Given('I navigate to the DemoQA website', () => {
-//   cy.visit('https://demoqa.com/');
-// });
-
-// Given('I choose the {string} option', (option) => {
-//   cy.contains(option).click();
-// });
-
-// Given('I click on the {string} submenu', (submenu) => {
-//   cy.contains(submenu).click();
-// });
-
 When('I fill the form with random data', () => {
   cy.get('#firstName').type(firstName);
   cy.get('#lastName').type(lastName);
