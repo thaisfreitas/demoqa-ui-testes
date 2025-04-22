@@ -5,6 +5,7 @@ Este projeto demonstra a automação de testes de interface do usuário para o w
 ## Estrutura do Projeto
 ![image](https://github.com/user-attachments/assets/77dbcb28-c99c-4f83-b57e-2cc3318c6730)
 
+## Pré-requisitos
 
 Antes de executar os testes, certifique-se de ter o seguinte instalado em sua máquina:
 
@@ -45,22 +46,31 @@ Siga estes passos para configurar e executar os testes:
     ```
     Este comando executará todos os testes e exibirá os resultados no terminal.
 
-## Cenários de Teste Implementados
-
-Atualmente, o projeto contém o seguinte cenário de teste:
-
-* **Preencher e submeter o formulário de prática:**
-    * Acessa a página inicial do DemoQA.
-    * Navega até a seção de Forms e clica em Practice Form.
-    * Preenche o formulário com dados aleatórios (nome, sobrenome, e-mail, gênero, telefone, data de nascimento, hobbies, endereço, estado e cidade).
-    * Realiza o upload do arquivo `sample.txt` localizado na pasta `cypress/fixtures`.
-    * Submete o formulário.
-    * Verifica se um modal de confirmação é exibido.
-    * Fecha o modal de confirmação.
-
 ## Próximos Passos
 
-Este projeto serve como um ponto de partida. Você pode adicionar mais cenários de teste para cobrir outras funcionalidades do website DemoQA. Para adicionar novos testes:
+Para evoluir e manter a qualidade deste projeto de automação, os seguintes passos seriam necessários:
 
-1.  Crie um novo arquivo `.feature` dentro da pasta `cypress/e2e/features` para descrever o novo cenário.
-2.  Crie um novo arquivo `.js` (ou adicione ao existente) dentro da pasta `cypress/e2e/step_definitions` para implementar os passos definidos no novo arquivo `.feature`.
+1.  **Cobertura de Mais Cenários de Teste:**
+    * Identificar e automatizar outros fluxos de usuários e funcionalidades importantes do website DemoQA.
+    * Criar novos arquivos `.feature` dentro da pasta `cypress/e2e/features` para descrever esses novos cenários de teste de forma clara e concisa.
+    * Implementar os passos definidos nos novos arquivos `.feature` em arquivos `.js` correspondentes dentro da pasta `cypress/e2e/step_definitions`.
+
+2.  **Refatoração do Código (Refactoring):**
+    * **Remover Duplicação de Código:** Identificar e eliminar trechos de código repetidos nos arquivos de Step Definitions, tornando a manutenção mais fácil e o código mais limpo.
+    * **Criação de Funções Utilitárias:** Extrair lógicas comuns (como navegação, preenchimento de campos específicos, etc.) para funções reutilizáveis em arquivos separados (e.g., `cypress/support/utils.js`).
+
+3.  **Implementação do Padrão Page Object (Page Object Model - POM):**
+    * **Criação de Classes de Página:** Desenvolver classes separadas (na pasta `cypress/e2e/pages`, por exemplo) que representam as páginas do website DemoQA. Cada classe deve conter:
+        * **Seletores:** Definição de todos os elementos da página que serão interagidos nos testes (usando seletores CSS, XPath, etc.).
+        * **Métodos:** Funções que encapsulam as interações com os elementos da página (e.g., `preencherNome()`, `clicarBotaoSubmit()`).
+    * **Utilização nos Step Definitions:** Importar e utilizar as classes de página nos arquivos de Step Definitions, tornando os passos mais concisos, legíveis e independentes das mudanças na estrutura da página.
+
+4.  **Melhorias na Gestão de Dados de Teste:**
+    * Explorar estratégias para gerenciar dados de teste de forma mais eficiente (e.g., utilizando arquivos JSON na pasta `cypress/fixtures`, bibliotecas de geração de dados como Faker).
+    * Implementar mecanismos para variar os dados de teste e cobrir diferentes casos de uso.
+
+5.  **Implementação de Hooks (Ganchos):**
+    * Utilizar os hooks do Cucumber (`Before`, `After`, `BeforeStep`, `AfterStep`) para configurar e limpar o estado do teste, realizar ações antes ou depois de cenários ou passos específicos.
+
+6.  **Relatórios de Teste Aprimorados:**
+    * Configurar e integrar ferramentas de geração de relatórios mais detalhados e visualmente atraentes (e.g., `cypress-mochawesome-reporter`).
